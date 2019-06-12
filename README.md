@@ -35,7 +35,7 @@ If you want to try our method on Dunnhumby data set, please visit [the offical w
 ```
 python Dunnhumby_data_preprocessing.py ./dunnhumby_50k/ past.csv future.csv
 ```
-The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before. 
+The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before. As there are more customers in this datasets, we can achieve good performance with 6 epoches.
 
 
 Last Update Date: June 12, 2019
