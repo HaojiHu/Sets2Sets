@@ -601,6 +601,8 @@ def trainIters(data_chunk, output_size, encoder, decoder, model_id, training_key
         filepath = './models/decoder'+ (model_id)  + '_model_epoch' + str(int(j))
         decoder_pathes.append(filepath)
         torch.save(decoder, filepath)
+        print('Finish epoch: '+str(j))
+        print('Model is saved.')
 
     #showPlot(plot_losses)
         #print('The loss: ' + str(print_loss_total))
@@ -922,7 +924,7 @@ def partition_the_data(data_chunk,key_set,next_k_step):
         filtered_key_set.append(key)
 
     training_key_set = filtered_key_set[0:int(4 / 5 * len(filtered_key_set))]
-    print(len(training_key_set))
+    print('Number of training instances: ' + str(len(training_key_set)))
     test_key_set = filtered_key_set[int(4 / 5 * len(filtered_key_set)):]
     return training_key_set,test_key_set
 
@@ -971,9 +973,7 @@ def main(argv):
     if training:
         if atten_decoder:
             trainIters(data_chunk, input_size,encoder1, attn_decoder1,model_version, training_key_set,weights,next_k_step, num_iter,print_every=print_val)
-    #evaluateRandomly(encoder1, attn_decoder1)
-    ######################################################################
-    #
+    
     else:
         encoder_pathes = './models/encoder'+ str(model_version) + '_model_epoch' + str(model_epoch)
         decoder_pathes = './models/decoder'+ str(model_version) + '_model_epoch' + str(model_epoch)
