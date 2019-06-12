@@ -30,7 +30,7 @@ The above command will test the learned model on the left 1 fold data. We just n
 
 ### Preprocess the Dunnhumby data set
 
-If we want to try our method on Dunnhumby data set, please visit [the offical website.](https://www.dunnhumby.com/careers/engineering/sourcefiles) View the 'Let's Get Sort-of-Real'. Download the the data for randomly selected sample of 50,000 customers. We provide our script to transfer their data into the formate our method needs. After extracting all the files in the zip file and put them under a folder (e.g. ./dunnhumby_50k/), please remember to delete a file named time.csv which is not needed in our method. Then, put our script and the folder './dunnhumby_50k/' at the same level. Run our script by following command:
+If you want to try our method on Dunnhumby data set, please visit [the offical website.](https://www.dunnhumby.com/careers/engineering/sourcefiles) View the 'Let's Get Sort-of-Real'. Download the the data for randomly selected sample of 50,000 customers. We provide our script to transfer their data into the formate our method needs. After extracting all the files in the zip file and put them under a folder (e.g. ./dunnhumby_50k/), please remember to delete a file named time.csv which is not needed in our method. Then, put our script and the folder './dunnhumby_50k/' at the same level. Run our script by following command:
 ```
 python Dunnhumby_data_preprocessing.py ./dunnhumby_50k/ past.csv future.csv
 ```
