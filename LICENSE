@@ -1,4 +1,4 @@
-Copyright 2018 The Sets2Sets: Learning from Sequential Sets with Neural Networks. Authors (Xiangnan He et al). All rights reserved.
+Copyright 2018 The Sets2Sets: Learning from Sequential Sets with Neural Networks. Authors (Haoji Hu and Xiangnan He). All rights reserved.
 
                                  Apache License
                            Version 2.0, January 2004
@@ -187,8 +187,6 @@ Copyright 2018 The Sets2Sets: Learning from Sequential Sets with Neural Networks
       file or class name and description of purpose be included on the
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
-
-   Copyright 2018 The Neural Collaborative Filtering Authors (Xiangnan He et al).
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
