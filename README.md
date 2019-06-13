@@ -25,7 +25,7 @@ Test:
 ```
 python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv 1 2 0 8 
 ```
-The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0 and specify  which model (here we use the model learned at epoch 8). The results will be printed out. 
+The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0 and specify  which model (here we use the model learned at epoch 8). Then, the results will be printed out. 
 
 
 
