@@ -259,10 +259,9 @@ class custom_MultiLabelLoss_torch(nn.modules.loss._Loss):
         set_loss = Variable(torch.FloatTensor([labmda * normalized_loss]), requires_grad=True)
         if use_cuda:
             set_loss = set_loss.cuda()
-        print('set loss: '+str(set_loss.data))
         set_loss = set_loss.cuda()
-        #loss = mseloss + set_loss
-        loss = mseloss
+        loss = mseloss + set_loss
+        #loss = mseloss
         return loss
 
 
