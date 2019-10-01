@@ -17,15 +17,15 @@ We use pytorch to implement our method.
 
 Training:
 ```
-python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv 1 2 1 
+python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 1 
 ```
-The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model id, the number of subsequent sets in the training instances, and the flag for mode. You can use any float number for the model id. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epoches are saved under the folder './models/' (Please don't forget to create this folder at the same place as the code files). We use a default number of max epoches 20 as we observe that our method usually achieves the best performance around 6-8 epoches accross different data sets. You can stop the training step if you get the model you need. 
+The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model name, the number of subsequent sets in the training instances, and the flag for mode. You can use any float number for the model id. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epoches are saved under the folder './models/' (Please don't forget to create this folder at the same place as the code files). We use a default number of max epoches 20 as we observe that our method usually tends to overfitting within 20 epochs. 
 
 Test:
 ```
-python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv 1 2 0 8 
+python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 0 
 ```
-The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0 and specify  which model (here we use the model learned at epoch 8). Then, the results will be printed out. 
+The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0. The model giving best performance on the validation set will be applied on the test set.
 
 
 
@@ -38,4 +38,4 @@ python Dunnhumby_data_preprocessing.py ./dunnhumby_50k/ past.csv future.csv
 The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before. As there are more customers in this data set, we can achieve good performance with 6 epoches.
 
 
-Last Update Date: June 12, 2019
+Last Update Date: Oct. 1, 2019
