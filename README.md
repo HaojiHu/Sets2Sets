@@ -25,7 +25,7 @@ Test:
 ```
 python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 0 
 ```
-The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0. The model giving best performance on the validation set will be applied on the test set.
+The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0. The test  performance of the model giving best performance on the validation set will be printed out.
 
 
 
