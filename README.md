@@ -19,7 +19,7 @@ Training:
 ```
 python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 1 
 ```
-The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model name, the number of subsequent sets in the training instances, and the flag for mode. You can use any float number for the model id. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epoches are saved under the folder './models/' (Please don't forget to create this folder at the same place as the code files). We use a default number of max epoches 20 for demonstration. You can change this if you need more epochs. 
+The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model name, the number of subsequent sets in the training instances, and the flag for mode. You can use any float number for the model id. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epochs are saved under the folder './models/' (Please don't forget to create this folder at the same place as the code files). We use a default number of max epochs 20 for demonstration. You can change this if you need more epochs. 
 
 Test:
 ```
@@ -35,7 +35,7 @@ If you want to try our method on Dunnhumby data set, please visit [the offical w
 ```
 python Dunnhumby_data_preprocessing.py ./dunnhumby_50k/ past.csv future.csv
 ```
-The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before. As there are more customers in this data set, we can achieve good performance with 6 epoches.
+The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before. As there are more customers in this data set, we can achieve good performance with 6 epochs.
 
 
 Last Update Date: Oct. 1, 2019
