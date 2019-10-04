@@ -1018,19 +1018,19 @@ def main(argv):
             print('Epoch: ', idx1)
             print('recall: ', recall_list[idx1])
             print('ndcg: ', ndcg_list[idx1])
-            print('hr: ', hr_list[idx1])
+            print('phr: ', hr_list[idx1])
 
             print('max valid ndcg results:')
             print('Epoch: ', idx2)
             print('recall: ', recall_list[idx2])
             print('ndcg: ', ndcg_list[idx2])
-            print('hr: ', hr_list[idx2])
+            print('phr: ', hr_list[idx2])
 
-            print('max valid hr results:')
+            print('max valid phr results:')
             print('Epoch: ', idx3)
             print('recall: ', recall_list[idx3])
             print('ndcg: ', ndcg_list[idx3])
-            print('hr: ', hr_list[idx3])
+            print('phr: ', hr_list[idx3])
 
 if __name__ == '__main__':
     main(sys.argv)
