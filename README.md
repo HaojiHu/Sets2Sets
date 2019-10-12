@@ -37,5 +37,6 @@ python Dunnhumby_data_preprocessing.py ./dunnhumby_50k/ past.csv future.csv
 ```
 The data will be generated under the current folder. You can just replace the two files (TaFang_history.csv and TaFang_future.csv) with these two generated files to apply our method on Dunnhumby data set as before.
 
+We update the training loss view as previous version is not easy for observing the training loss at each epoch.
 
 Last Update Date: Oct. 1, 2019
