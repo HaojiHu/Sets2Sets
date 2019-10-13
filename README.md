@@ -39,6 +39,6 @@ The data will be generated under the current folder. You can just replace the tw
 
 ### Update
 
-We update the training loss view as previous version is not easy for observing the training loss at each epoch.
+We update the training loss view as previous version is not easy for observing the training loss at each epoch. The model selection is also added for test step in this version.
 
 Last Update Date: Oct. 1, 2019
