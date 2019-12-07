@@ -4,7 +4,18 @@ This is our implementation for the paper:
 
 Haoji Hu and Xiangnan He (2019). Sets2Sets: Learning from Sequential Sets with Neural Networks. In the 25th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’19), Anchorage, AK, USA
 
-**Please cite our paper if you use our codes. Thanks!** 
+**Please cite our paper if you use our codes and datasets. Thanks!** 
+```
+@inproceedings{hu2019sets2sets,
+  title={Sets2Sets: Learning from Sequential Sets with Neural Networks},
+  author={Hu, Haoji and He, Xiangnan},
+  booktitle={Proceedings of the 25th ACM SIGKDD international conference on Knowledge discovery and data mining},
+  pages={197--206},
+  year={2019},
+  organization={ACM}
+  year={2019}
+}
+```
 
 Author: Haoji Hu
 
