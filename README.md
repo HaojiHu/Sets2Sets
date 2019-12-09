@@ -30,7 +30,7 @@ Training:
 ```
 python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 1 
 ```
-The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model name, the number of subsequent sets in the training instances, and the flag for mode. You can use any float number for the model id. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epochs are saved under the folder './models/' (Our code will create this folder). We use a default number of max epochs 20 for demonstration. You can change this if you need more epochs. 
+The above command will train our model based on 4 folds of the Ta-Feng data set. The three parameters in the command tail are the model name, the number of subsequent sets in the training instances, and the flag for mode. Our example data can only support the number of subsequent sets no more than 3, which is the same as the results reported in our paper. Note that our method can handle variable length of subsequent sets due to the RNN. We fix this for experimental goal. The flag is set to 1 for training mode and 0 for test mode. The models learned from different epochs are saved under the folder './models/' (Our code will create this folder). We use a default number of max epochs 20 for demonstration. You can change this if you need more epochs. 
 
 Test:
 ```
