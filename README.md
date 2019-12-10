@@ -13,7 +13,6 @@ Haoji Hu and Xiangnan He (2019). Sets2Sets: Learning from Sequential Sets with N
   pages={1491--1499},
   year={2019},
   organization={ACM}
-  year={2019}
 }
 ```
 
