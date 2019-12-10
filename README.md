@@ -10,7 +10,7 @@ Haoji Hu and Xiangnan He (2019). Sets2Sets: Learning from Sequential Sets with N
   title={Sets2Sets: Learning from Sequential Sets with Neural Networks},
   author={Hu, Haoji and He, Xiangnan},
   booktitle={Proceedings of the 25th ACM SIGKDD international conference on Knowledge discovery and data mining},
-  pages={197--206},
+  pages={1491--1499},
   year={2019},
   organization={ACM}
   year={2019}
