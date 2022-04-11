@@ -35,8 +35,9 @@ teacher_forcing_ratio = 0
 MAX_LENGTH = 1000
 learning_rate = 0.001
 optimizer_option = 2
-print_val = 3000
+print_val = 300
 use_cuda = torch.cuda.is_available()
+print(f'awan log - use cuda = {use_cuda}')
 
 
 class EncoderRNN_new(nn.Module):
@@ -55,22 +56,22 @@ class EncoderRNN_new(nn.Module):
 
     def forward(self, input, hidden):
         if use_embedding:
-            list = Variable(torch.LongTensor(input).view(-1, 1))
+            list = Variable(torch.LongTensor(input).reshape(-1, 1))
             if use_cuda:
                 list = list.cuda()
-            average_embedding = Variable(torch.zeros(hidden_size)).view(1, 1, -1)
-            # sum_embedding = Variable(torch.zeros(hidden_size)).view(1,1,-1)
-            vectorized_input = Variable(torch.zeros(self.input_size)).view(-1)
+            average_embedding = Variable(torch.zeros(hidden_size)).reshape(1, 1, -1)
+            # sum_embedding = Variable(torch.zeros(hidden_size)).reshape(1,1,-1)
+            vectorized_input = Variable(torch.zeros(self.input_size)).reshape(-1)
             if use_cuda:
                 average_embedding = average_embedding.cuda()
                 # sum_embedding = sum_embedding.cuda()
                 vectorized_input = vectorized_input.cuda()
 
             for ele in list:
-                embedded = self.embedding(ele).view(1, 1, -1)
+                embedded = self.embedding(ele).reshape(1, 1, -1)
                 tmp = average_embedding.clone()
                 average_embedding = tmp + embedded
-                # embedded = self.time_embedding(ele).view(1, 1, -1)
+                # embedded = self.time_embedding(ele).reshape(1, 1, -1)
                 # tmp = sum_embedding.clone()
                 # sum_embedding = tmp + embedded
                 vectorized_input[ele] = 1
@@ -84,13 +85,13 @@ class EncoderRNN_new(nn.Module):
                 if use_cuda:
                     length = length.cuda()
                 # for idx in range(hidden_size):
-                real_ave = average_embedding.view(-1) / length
-                average_embedding = real_ave.view(1, 1, -1)
+                real_ave = average_embedding.reshape(-1) / length
+                average_embedding = real_ave.reshape(1, 1, -1)
 
             embedding = average_embedding
         else:
             tensorized_input = torch.from_numpy(input).clone().type(torch.FloatTensor)
-            inputs = Variable(torch.unsqueeze(tensorized_input, 0).view(1, -1))
+            inputs = Variable(torch.unsqueeze(tensorized_input, 0).reshape(1, -1))
             if use_cuda:
                 inputs = inputs.cuda()
             if use_linear_reduction == 1:
@@ -145,15 +146,15 @@ class AttnDecoderRNN_new(nn.Module):
 
     def forward(self, input, hidden, encoder_outputs, history_record, last_hidden):
         if use_embedding:
-            list = Variable(torch.LongTensor(input).view(-1, 1))
+            list = Variable(torch.LongTensor(input).reshape(-1, 1))
             if use_cuda:
                 list = list.cuda()
-            average_embedding = Variable(torch.zeros(hidden_size)).view(1, 1, -1)
+            average_embedding = Variable(torch.zeros(hidden_size)).reshape(1, 1, -1)
             if use_cuda:
                 average_embedding = average_embedding.cuda()
 
             for ele in list:
-                embedded = self.embedding(ele).view(1, 1, -1)
+                embedded = self.embedding(ele).reshape(1, 1, -1)
                 tmp = average_embedding.clone()
                 average_embedding = tmp + embedded
 
@@ -163,13 +164,13 @@ class AttnDecoderRNN_new(nn.Module):
                 if use_cuda:
                     length = length.cuda()
                 # for idx in range(hidden_size):
-                real_ave = average_embedding.view(-1) / length
-                average_embedding = real_ave.view(1, 1, -1)
+                real_ave = average_embedding.reshape(-1) / length
+                average_embedding = real_ave.reshape(1, 1, -1)
 
             embedding = average_embedding
         else:
             tensorized_input = torch.from_numpy(input).clone().type(torch.FloatTensor)
-            inputs = Variable(torch.unsqueeze(tensorized_input, 0).view(1, -1))
+            inputs = Variable(torch.unsqueeze(tensorized_input, 0).reshape(1, -1))
             if use_cuda:
                 inputs = inputs.cuda()
             if use_linear_reduction == 1:
@@ -184,7 +185,7 @@ class AttnDecoderRNN_new(nn.Module):
         else:
             droped_ave_embedded = embedding
 
-        history_context = Variable(torch.FloatTensor(history_record).view(1, -1))
+        history_context = Variable(torch.FloatTensor(history_record).reshape(1, -1))
         if use_cuda:
             history_context = history_context.cuda()
 
@@ -213,7 +214,7 @@ class AttnDecoderRNN_new(nn.Module):
 
         value = torch.sigmoid(self.attn_combine5(history_context).unsqueeze(0))
 
-        one_vec = Variable(torch.ones(self.output_size).view(1, -1))
+        one_vec = Variable(torch.ones(self.output_size).reshape(1, -1))
         if use_cuda:
             one_vec = one_vec.cuda()
 
@@ -223,7 +224,7 @@ class AttnDecoderRNN_new(nn.Module):
 
         output = F.softmax(linear_output * (one_vec - res * value[0]) + history_context * value[0], dim=1)
 
-        return output.view(1, -1), hidden, attn_weights
+        return output.reshape(1, -1), hidden, attn_weights
 
     def initHidden(self):
         result = Variable(torch.zeros(num_layers, 1, self.hidden_size))
@@ -242,16 +243,19 @@ class custom_MultiLabelLoss_torch(nn.modules.loss._Loss):
         pred = pred.data
         target = target.data
         #
-        ones_idx_set = (target == 1).nonzero()
-        zeros_idx_set = (target == 0).nonzero()
-        # zeros_idx_set = (target == -1).nonzero()
+        # ones_idx_set = (target == 1).nonzero()
+        # zeros_idx_set = (target == 0).nonzero()
+        # # zeros_idx_set = (target == -1).nonzero()
+        
+        ones_idx_set = torch.nonzero(target == 1)
+        zeros_idx_set = torch.nonzero(target == 0)
         
         ones_set = torch.index_select(pred, 1, ones_idx_set[:, 1])
         zeros_set = torch.index_select(pred, 1, zeros_idx_set[:, 1])
         
         repeat_ones = ones_set.repeat(1, zeros_set.shape[1])
         repeat_zeros_set = torch.transpose(zeros_set.repeat(ones_set.shape[1], 1), 0, 1).clone()
-        repeat_zeros = repeat_zeros_set.view(1, -1)
+        repeat_zeros = repeat_zeros_set.reshape(1, -1)
         difference_val = -(repeat_ones - repeat_zeros)
         exp_val = torch.exp(difference_val)
         exp_loss = torch.sum(exp_val)
@@ -456,10 +460,10 @@ def train(input_variable, target_variable, encoder, decoder, codes_inverse_freq,
         for idx in target_variable[di + 1]:
             vectorized_target[idx] = 1
 
-        target = Variable(torch.FloatTensor(vectorized_target).view(1, -1))
+        target = Variable(torch.FloatTensor(vectorized_target).reshape(1, -1))
         if use_cuda:
             target = target.cuda()
-        weights = Variable(torch.FloatTensor(codes_inverse_freq).view(1, -1))
+        weights = Variable(torch.FloatTensor(codes_inverse_freq).reshape(1, -1))
         if use_cuda:
             weights = weights.cuda()
 
@@ -560,6 +564,10 @@ def trainIters(data_chunk, output_size, encoder, decoder, model_id, training_key
             # training_pair = training_pairs[iter - 1]
             # input_variable = training_pair[0]
             # target_variable = training_pair[1]
+            
+            if iter % print_every == 0:
+                print(f'awan log - iteration {iter} / {len(training_key_set) + 1}')
+            
             input_variable = data_chunk[past_chunk][training_keys[iter - 1]]
             target_variable = data_chunk[future_chunk][training_keys[iter - 1]]
 
@@ -945,14 +953,20 @@ def main(argv):
     # files = [argv[1], argv[2]]
     # files = ['Dunnhumby_history_order_10_steps_50kuser.csv', 'Dunnhumby_future_order_10_steps_50kuser.csv']
     # files = ['Tmall_history_NB.csv', 'Tmall_future_NB.csv']
-    files = ['TaFang_history.csv', 'TaFang_future.csv']
+    # files = ['TaFang_history.csv', 'TaFang_future.csv']
+    files = [
+        'awantunai_suc_explore_dataset/awan_all_basket_history.csv',
+        'awantunai_suc_explore_dataset/awan_all_basket_future.csv'
+    ]
     model_version = 'Tafeng_0.001'
 
-    files = [argv[1],argv[2]]
+    # files = [argv[1],argv[2]]
 
     model_version = argv[3]
 
     next_k_step = int(argv[4])
+    print('next steps =', next_k_step)
+    
     training = int(argv[5])
     path = './'
     directory = './models/'
@@ -970,20 +984,24 @@ def main(argv):
             weights[idx] = max_freq / codes_freq[idx]
         else:
             weights[idx] = 0
-
+            
+    print('awan log - init encoder and decoder')
     encoder1 = EncoderRNN_new(input_size, hidden_size, num_layers)
     attn_decoder1 = AttnDecoderRNN_new(hidden_size, input_size, num_layers, dropout_p=0.1)
 
     if use_cuda:
+        print('awan log - init cuda')
         encoder1 = encoder1.cuda()
         attn_decoder1 = attn_decoder1.cuda()
 
     if training == 1:
         if atten_decoder:
+            print('awan log - train')
             trainIters(data_chunk, input_size, encoder1, attn_decoder1, model_version, training_key_set, weights,
                        next_k_step, num_iter, print_every=print_val)
 
     else:
+        print('awan log - validate')
         for i in [20, 40]:
             valid_recall = []
             valid_ndcg = []
