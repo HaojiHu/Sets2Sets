@@ -23,7 +23,9 @@ We use pytorch to implement our method.
 - Torch version:  '1.0.1'
 - Python version: '3.6.8'
 
-## A quick start to run the codes with Ta-Feng data set.
+## A quick start to run the codes
+
+### Ta-Feng data set
 
 Training:
 ```
@@ -35,8 +37,18 @@ Test:
 ```
 python Sets2Sets.py ./data/TaFang_history.csv ./data/TaFang_future.csv TaFang 2 0 
 ```
-The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0. The test  performance of the model giving best performance on the validation set will be printed out.
+The above command will test the learned model on the left 1 fold data. We just need to change the mode flag from 1 to 0. The test performance of the model giving best performance on the validation set will be printed out.
 
+### AwanTunai data set
+
+Training:
+```
+python Sets2Sets.py awantunai_suc_explore_dataset/awan_all_basket_history.csv awantunai_suc_explore_dataset/awan_all_basket_future.csv Awan 1 1
+```
+
+```
+python Sets2Sets.py awantunai_suc_explore_dataset/awan_all_basket_history_with_features.csv awantunai_suc_explore_dataset/awan_all_basket_future_with_features.csv Awan 1 1
+```
 
 
 ### Preprocess the Dunnhumby data set
